@@ -106,7 +106,9 @@
           <el-tab-pane label="商品内容" name="4">
             <quill-editor v-model="addForm.goods_introduce"></quill-editor>
             <!-- 添加商品的按钮 -->
-            <el-button type="primary" class="btnAdd" @click="add">添加商品</el-button>
+            <el-button type="primary" class="btnAdd" @click="add"
+              >添加商品</el-button
+            >
           </el-tab-pane>
         </el-tabs>
       </el-form>
@@ -114,7 +116,7 @@
 
     <!-- 图片预览 -->
     <el-dialog title="图片预览" :visible.sync="previewVisible" width="50%">
-      <img :src="previewPath" alt="" class="previewImg"/>
+      <img :src="previewPath" alt="" class="previewImg" />
     </el-dialog>
   </div>
 </template>
@@ -264,20 +266,23 @@ export default {
         form.goods_cat = form.goods_cat.join(',')
         // 处理动态参数
         this.manyTableData.forEach(item => {
-          const newInfo = {attr_id: item.attr_id, attr_value: item.attr_vals.join(' ')}
+          const newInfo = {
+            attr_id: item.attr_id,
+            attr_value: item.attr_vals.join(' ')
+          }
           this.addForm.attrs.push(newInfo)
         })
         // 处理静态属性
         this.onlyTableData.forEach(item => {
-          const newInfo = {attr_id: item.attr_id, attr_value: item.attr_vals}
+          const newInfo = { attr_id: item.attr_id, attr_value: item.attr_vals }
           this.addForm.attrs.push(newInfo)
         })
 
-        form.attrs = this.addForm.attrs 
+        form.attrs = this.addForm.attrs
         // 发起请求添加商品
         // 商品的名称, 必须是唯一的
-        const {data: res} = this.$http.post('goods', form)
-        if (res.meta.status !== 201) { 
+        const { data: res } = this.$http.post('goods', form)
+        if (res.meta.status !== 201) {
           return this.$message.error('添加商品失败!')
         }
         this.$message.success('添加商品成功!')
@@ -302,5 +307,4 @@ export default {
 .previewImg {
   width: 100%;
 }
-
 </style>
